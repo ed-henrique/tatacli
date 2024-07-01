@@ -5,11 +5,13 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/eiannone/keyboard"
 	"tatacli/internal/render"
+
+	"atomicgo.dev/keyboard"
+	"atomicgo.dev/keyboard/keys"
 )
 
-func Start() {
+func Start(board *render.Board) {
 	// Handle OS signals to finish the program
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt, os.Kill, syscall.SIGTERM)
@@ -20,23 +22,33 @@ func Start() {
 	}()
 
 	// Handle user input
-	cInput, err := keyboard.GetKeys(1)
-	if err != nil {
-		panic("Could not start input listener!")
-	}
-
 	go func() {
-		var key keyboard.KeyEvent
-
-		for {
-			key = <-cInput
-			switch key.Rune {
-			case 'z':
-			case 'x':
-			case 'q':
-				_ = keyboard.Close()
-				c <- os.Interrupt
+		err := keyboard.Listen(func(key keys.Key) (stop bool, err error) {
+			switch key.Code {
+			case keys.CtrlC, keys.Escape:
+				return true, nil
+			case keys.RuneKey:
+				switch key.String() {
+				case "d":
+					board.IsLeftKaHit <- true
+				case "f":
+					board.IsLeftDonHit <- true
+				case "j":
+					board.IsRightDonHit <- true
+				case "k":
+					board.IsRightKaHit <- true
+				case "q":
+					return true, nil
+				}
 			}
+
+			return false, nil
+		})
+
+		if err != nil {
+			panic("Could not start keyboard input listener")
 		}
+
+		c <- os.Interrupt
 	}()
 }

@@ -6,6 +6,8 @@ import (
 )
 
 func main() {
-	input.Start()
-	render.Start()
+	board := render.NewBoard()
+
+	input.Start(&board)
+	render.Start(&board)
 }
