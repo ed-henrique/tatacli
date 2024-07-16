@@ -7,7 +7,7 @@ import (
 
 func TestSong(t *testing.T) {
 	t.Run("Single don", func(t *testing.T) {
-		s := song{notes: []string{don}}
+		s := song{notes: [][]byte{don}}
 
 		totalLen := 0
 		for _, ss := range s.notes {
@@ -22,7 +22,7 @@ func TestSong(t *testing.T) {
 	})
 
 	t.Run("Single ka", func(t *testing.T) {
-		s := song{notes: []string{ka}}
+		s := song{notes: [][]byte{ka}}
 
 		totalLen := 0
 		for _, ss := range s.notes {
@@ -37,14 +37,14 @@ func TestSong(t *testing.T) {
 	})
 
 	t.Run("Sample song", func(t *testing.T) {
-		s := song{notes: []string{don, don, don, don, don, ka, ka, ka, ka, ka}}
+		s := song{notes: [][]byte{don, don, don, don, don, ka, ka, ka, ka, ka}}
 
 		totalLen := 0
 		for _, ss := range s.notes {
 			totalLen += len(ss)
 		}
 
-		expectedLen := 5 * len(don) + 5 * len(ka)
+		expectedLen := 5*len(don) + 5*len(ka)
 
 		if totalLen != expectedLen {
 			t.Errorf("expected %d got %d", expectedLen, totalLen)
@@ -52,7 +52,7 @@ func TestSong(t *testing.T) {
 	})
 
 	t.Run("Sample song view", func(t *testing.T) {
-		s := song{notes: []string{don, don, don, don, don, ka, ka, ka, ka, ka}}
+		s := song{notes: [][]byte{don, don, don, don, don, ka, ka, ka, ka, ka}}
 		view := s.View(5)
 
 		expectedLen := 5 * len(don)
