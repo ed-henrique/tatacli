@@ -8,29 +8,42 @@ Because I can.
 
 ## Roadmap
 
-### Render Engine
+## Game Engine
 
-- [x] Show taiko board
-- [x] Clean screen before starting
-- [x] Clean screen after finishing
-- [ ] Update taiko board with the notes
-- [ ] Render only changing parts of the screen
+### General
 
-### Song Engine
-
-- [ ] Play song
-- [ ] Select song
-- [ ] Import song
-- [ ] Get notes from song
-- [ ] Play song in sync with notes
-- [ ] Add option to import `.osz` files
+- [ ] Point systen
+- [ ] Local and global leaderboard
+- [ ] Make appealing visuals for the game
 
 ### Input Engine
 
-- [ ] Handle offsets
+- [ ] Detect cheating
+- [ ] Take keyboard input
+- [ ] Take controller input
+- [ ] Work for multiple platforms
 - [ ] Add option to change default keys
 
-### Game
+### Sound Engine
 
-- [ ] Add leaderboard (local)
+- [ ] Play audio from the terminal
+- [ ] Handle multiple file formats
+- [ ] Add option to adjust song offset
+
+### Render Engine
+
+- [ ] Render menu
+- [ ] Render board
+- [ ] Render notes
+- [ ] Render big notes
+- [ ] Render drumrolls
+- [ ] Render ballon notes
+- [ ] Render only changing parts of the screen
+- [ ] Add option to adjust visual offset
+
+### Map Engine
+
+- [ ] Sync input, sound and rendering
+- [ ] Handle multiple file formats (namely `.osz` and `.tja`)
+- [ ] Import maps from [TJADB](https://tjadataba.se/) and [osu!](https://osu.ppy.sh/)
 
